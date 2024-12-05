@@ -20,13 +20,15 @@ class Operator(ABC):
     each operator has its unique symbol and evaluation with
     either one or two operands.
     """
-    def __init__(self, symbol : str):
-        self._symbol = symbol
+    def get_symbol(self):
+        ...
     @abstractmethod
-    def evaluate(self, first_operand :  Number, second_operand : Number = None):
+    def evaluate(self,first_operand :  Number, second_operand : Number = None) -> Number:
         ...
 
 class Plus(Operator):
-    def evaluate(self, first_operand: Number, second_operand: Number = None):
+    SYMBOL = '+'
+    def evaluate(self, first_operand: Number, second_operand : Number = None):
         return first_operand.get_value() + second_operand.get_value()
-
+    def get_symbol(self):
+        return self.SYMBOL
