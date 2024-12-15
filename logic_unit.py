@@ -1,9 +1,9 @@
 from math_functions import Number, Plus, Operator, Minus, Multiplication, Division, MaxOperator, Modulo, \
     AverageOperator, UnaryNegation, Factorial
 
-PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '^':3, '%':4, '$':5, '&':5, '@':5 , '~':6, '!':6}
-UNARY_OPERATORS = ['-', '~', '!']
-OPERATORS_DIC = {'+':Plus(), '-':Minus, '*':Multiplication, '/':Division, '$':MaxOperator, '%':Modulo, '@':AverageOperator, '~':UnaryNegation, '!':Factorial}
+PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '-u' :2.5, '^':3, '%':4, '$':5, '&':5, '@':5 , '~':6, '!':6}
+UNARY_OPERATORS = ['-u', '~', '!']
+OPERATORS_DIC = {'+':Plus(), '-':Minus(), '-u':Minus(), '*':Multiplication(), '/':Division(), '$':MaxOperator(), '%':Modulo(), '@':AverageOperator(), '~':UnaryNegation(), '!':Factorial()}
 class UnaryChecker:
     @staticmethod
     def is_unary(char : Operator, prev = None)->bool:
@@ -52,5 +52,5 @@ class PostFixConvertor:
 
 
 
-
+PostFixConvertor.convert(['~', '-','-',Number(3),'!'])
 

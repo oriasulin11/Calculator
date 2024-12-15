@@ -3,15 +3,16 @@ from abc import ABC, abstractmethod
 
 class Number:
     """
-    An instance of this class represent a number,
-    note that this class is immutable...
-    once a number is generated its value can not be changed
+    An instance of this class represent a number
     """
     def __init__(self, value):
         self._value = value
 
     def __str__(self):
         return str(self._value)
+
+    def set_value(self, new_value):
+        self._value = new_value
 
     def get_value(self):
         return self._value
