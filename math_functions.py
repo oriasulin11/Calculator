@@ -5,7 +5,7 @@ PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '-u' :2.5, '^':3, '%':4, '$':5, '&
 
 BINARY_OPERATORS = {'+','-','*','/','^','@','%','$','&'}
 PREFIX_OPERATORS = {'-u','~'}
-POSTFIX_OPERATORS = {'!'}
+POSTFIX_OPERATORS = {'!','#'}
 UNARY_OPERATORS = ['-u', '~', '!']
 
 class Number:
