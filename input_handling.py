@@ -1,4 +1,4 @@
-from turtledemo.penrose import start
+
 
 
 class InputHandler:
@@ -99,7 +99,6 @@ class InputValidator:
         if isinstance(parentheses_balance, str):#Mis
             exceptions.append(Exception(parentheses_balance))# in the future will be custom exception
 
-            # There is parentheses inversion
 
 
 
@@ -108,10 +107,6 @@ class InputValidator:
 
 
 
-
-inpt = InputHandler()
-inpt.take_input()
-print(StringProcessor.string_process(inpt.get_input()))
 
 
 

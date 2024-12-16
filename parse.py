@@ -30,13 +30,12 @@ class NumberParser:
                     parsed_expression.append(NumberParser.parse_number(number, is_decimal))
                     number = ""
                     is_decimal = False
-                    # Add non-numeric characters
+                # Add non-numeric characters
                 parsed_expression.append(char)
 
-                    # Handle the last number in the expression
+        # Handle the last number in the expression
         if number:
             parsed_expression.append(NumberParser.parse_number(number, is_decimal))
         return parsed_expression
 
-print(NumberParser.parse_expression(['3', '.', '5', '+', '-', '3']))
 

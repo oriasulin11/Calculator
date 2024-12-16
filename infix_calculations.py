@@ -1,5 +1,6 @@
 from math_functions import Number
-from logic_unit import OPERATORS_DIC
+from logic_unit import OPERATORS_DIC, BINARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
+
 
 class InfixCalc:
     """
@@ -22,9 +23,10 @@ class InfixCalc:
                 else:
                     processed_input.append(Number(-char.get_value()))
                 minus_count = 0
+                found_operator = False
             else:
                 if char == '-':
-                    if isinstance(prev_char, Number):
+                    if isinstance(prev_char, Number) or prev_char in POSTFIX_OPERATORS:
                         processed_input.append(char)
                     elif found_operator:
                         minus_count += 1
@@ -33,14 +35,11 @@ class InfixCalc:
                             processed_input.append('-u')
                 else:
                     processed_input.append(char)
-                found_operator = True
+                if char in (BINARY_OPERATORS, PREFIX_OPERATORS):
+                    found_operator = True
             prev_char = char
         return processed_input
 
-
-pro = InfixCalc.eval_expression(['~', '-','-',Number(3),'!'])
-for char in pro:
-    print(char if isinstance(char,str) else char.get_value())
 
 
 

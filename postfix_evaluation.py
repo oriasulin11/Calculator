@@ -3,8 +3,8 @@ from math_functions import Number
 
 
 class PostfixEvaluation:
-
-    def evaluate_postfix(self, postfix_expression):
+    @staticmethod
+    def evaluate_postfix(postfix_expression):
         number_stack = []
         for char in postfix_expression:
             # push numbers to the stack
@@ -12,12 +12,12 @@ class PostfixEvaluation:
                 number_stack.append(char)
             elif char in UNARY_OPERATORS:
                 operand1 = number_stack.pop()
-                number_stack.append(Number(OPERATORS_DIC[char].evaluate(operand1)))
+                number_stack.append(OPERATORS_DIC[char].evaluate(operand1))
             # Is binary operator
             else:
                 operand1 = number_stack.pop()
                 operand2 = number_stack.pop()
-                number_stack.append(Number(OPERATORS_DIC[char].evaluate(operand1,operand2)))
+                number_stack.append(OPERATORS_DIC[char].evaluate(operand2,operand1))
         return number_stack[0]
 
 

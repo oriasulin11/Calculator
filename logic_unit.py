@@ -1,16 +1,13 @@
 from math_functions import Number, Plus, Operator, Minus, Multiplication, Division, MaxOperator, Modulo, \
-    AverageOperator, UnaryNegation, Factorial
+    AverageOperator, UnaryNegation, Factorial, Power
 
 PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '-u' :2.5, '^':3, '%':4, '$':5, '&':5, '@':5 , '~':6, '!':6}
+BINARY_OPERATORS = {'+','-','*','/','^','@','%','$','&'}
+PREFIX_OPERATORS = {'-u','~'}
+POSTFIX_OPERATORS = {'!'}
 UNARY_OPERATORS = ['-u', '~', '!']
-OPERATORS_DIC = {'+':Plus(), '-':Minus(), '-u':Minus(), '*':Multiplication(), '/':Division(), '$':MaxOperator(), '%':Modulo(), '@':AverageOperator(), '~':UnaryNegation(), '!':Factorial()}
-class UnaryChecker:
-    @staticmethod
-    def is_unary(char : Operator, prev = None)->bool:
-        return (char.get_symbol() in UNARY_OPERATORS and(
-                prev is None or
-                prev in PRECEDENCE_DIC or
-                prev == '('))
+OPERATORS_DIC = {'+':Plus(), '-':Minus(), '-u':Minus(), '*':Multiplication(), '/':Division(),'^':Power(), '$':MaxOperator(), '%':Modulo(), '@':AverageOperator(), '~':UnaryNegation(), '!':Factorial()}
+
 class PostFixConvertor:
 
 
@@ -35,10 +32,17 @@ class PostFixConvertor:
                     operator_stack.pop()
             # Char is an operator
             else:
-                if UnaryChecker.is_unary(char,prev_char):
-                    operator_stack.append(char)
+                if char in UNARY_OPERATORS:
+                    if char != '!':
+                        operator_stack.append(char)
+                    else:
+
+                        if operator_stack and operator_stack[-1] == '~':
+                            postfix_expression.append(operator_stack.pop())
+                        operator_stack.append(char)
                 else:
                     while (operator_stack and
+                            operator_stack[-1] != '(' and
                            operator_stack != '(' and
                            PRECEDENCE_DIC[operator_stack[-1]] >= PRECEDENCE_DIC[char]):
                         postfix_expression.append(operator_stack.pop())
@@ -50,7 +54,4 @@ class PostFixConvertor:
         return postfix_expression
 
 
-
-
-PostFixConvertor.convert(['~', '-','-',Number(3),'!'])
 
