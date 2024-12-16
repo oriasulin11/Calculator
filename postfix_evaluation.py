@@ -1,5 +1,5 @@
 from exceptions import MissingOperandException, MissingOperatorException
-from logic_unit import UNARY_OPERATORS, OPERATORS_DIC
+from postfix_conversion import UNARY_OPERATORS, OPERATORS_DIC
 from math_functions import Number
 
 

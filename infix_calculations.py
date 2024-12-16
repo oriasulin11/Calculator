@@ -1,5 +1,5 @@
 from math_functions import Number
-from logic_unit import OPERATORS_DIC
+from postfix_conversion import OPERATORS_DIC
 from math_functions import BINARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
 
 

@@ -1,7 +1,7 @@
 from exceptions import MissingOperandException, MissingOperatorException
 from infix_calculations import InfixCalc
 from input_handling import InputHandler, StringProcessor
-from logic_unit import PostFixConvertor
+from postfix_conversion import PostFixConvertor
 from parse import NumberParser
 from postfix_evaluation import PostfixEvaluation
 
