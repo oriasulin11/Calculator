@@ -1,5 +1,6 @@
 from math_functions import Number
-from logic_unit import OPERATORS_DIC, BINARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
+from logic_unit import OPERATORS_DIC
+from math_functions import BINARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
 
 
 class InfixCalc:

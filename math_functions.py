@@ -1,6 +1,13 @@
 import math
 from abc import ABC, abstractmethod
 
+PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '-u' :2.5, '^':3, '%':4, '$':5, '&':5, '@':5 , '~':6, '!':6}
+
+BINARY_OPERATORS = {'+','-','*','/','^','@','%','$','&'}
+PREFIX_OPERATORS = {'-u','~'}
+POSTFIX_OPERATORS = {'!'}
+UNARY_OPERATORS = ['-u', '~', '!']
+
 class Number:
     """
     An instance of this class represent a number
@@ -90,8 +97,13 @@ class Factorial(Operator):
             raise ValueError("Factorial is a unary operator")
 
         value = first_operand.get_value()
+        if int(value) != float(value):
+            raise ValueError("Factorial is not defined for non-integer numbers")
         if value < 0:
             raise ValueError("Factorial is not defined for negative numbers")
+
+        elif value > 100:
+            raise ValueError("Cant preform factorial operation on numbers grater than 100")
 
         # Factorial calculation
         result = 1
