@@ -1,4 +1,6 @@
-from exceptions import MissingOperandException, MissingOperatorException, SyntaxException
+
+
+from exceptions import MissingOperandException, MissingOperatorException, SyntaxException, EmptyExpressionException
 from infix_calculations import InfixCalc
 from input_handling import InputHandler, StringProcessor
 from postfix_conversion import PostFixConvertor
@@ -30,6 +32,8 @@ class MainThread:
                 # Evaluate the result
                 result = PostfixEvaluation.evaluate_postfix(postfix_expression)
                 print(result.get_value())
+            except EmptyExpressionException as e:
+                print(e)
             except SyntaxException as e:
                 print(e)
             except MissingOperandException as e:
@@ -40,8 +44,8 @@ class MainThread:
                 print(e)
             except ZeroDivisionError as e:
                 print(e)
-
-
+            except OverflowError as e:
+                print(e)
 
 
 

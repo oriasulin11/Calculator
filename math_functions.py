@@ -1,17 +1,19 @@
 import math
 from abc import ABC, abstractmethod
 
-PRECEDENCE_DIC = {'+':1, '-':1, '*':2, '/':2, '-u' :2.5, '^':3, '%':4, '$':5, '&':5, '@':5 , '~':6, '!':6}
+PRECEDENCE_DIC = {'+': 1, '-': 1, '*': 2, '/': 2, '-u': 2.5, '^': 3, '%': 4, '$': 5, '&': 5, '@': 5, '~': 6, '!': 6}
 
-BINARY_OPERATORS = {'+','-','*','/','^','@','%','$','&'}
-PREFIX_OPERATORS = {'-u','~'}
-POSTFIX_OPERATORS = {'!','#'}
+BINARY_OPERATORS = {'+', '-', '*', '/', '^', '@', '%', '$', '&'}
+PREFIX_OPERATORS = {'-u', '~'}
+POSTFIX_OPERATORS = {'!', '#'}
 UNARY_OPERATORS = ['-u', '~', '!']
+
 
 class Number:
     """
     An instance of this class represent a number
     """
+
     def __init__(self, value):
         self._value = value
 
@@ -23,17 +25,22 @@ class Number:
 
     def get_value(self):
         return self._value
+
+
 class Operator(ABC):
     """
     This abstract class represents an operator,
     each operator has its unique symbol and evaluation with
     either one or two operands.
     """
+
     def get_symbol(self):
         ...
+
     @abstractmethod
-    def evaluate(self,first_operand :  Number, second_operand : Number = None) -> Number:
+    def evaluate(self, first_operand: Number, second_operand: Number = None) -> Number:
         ...
+
 
 class Plus(Operator):
     """
@@ -41,10 +48,12 @@ class Plus(Operator):
     Adding two numbers
     """
     SYMBOL = '+'
-    def evaluate(self, first_operand: Number, second_operand : Number = None) -> Number:
+
+    def evaluate(self, first_operand: Number, second_operand: Number = None) -> Number:
         if second_operand is None:
             raise ValueError("Addition requires two operands")
         return Number(first_operand.get_value() + second_operand.get_value())
+
     def get_symbol(self):
         return self.SYMBOL
 
@@ -188,7 +197,7 @@ class Power(Operator):
         if second_operand is None:
             raise ValueError("Power operator requires two operands")
 
-        return Number(math.pow(first_operand.get_value(),second_operand.get_value()))
+        return Number(math.pow(first_operand.get_value(), second_operand.get_value()))
 
     def get_symbol(self):
         return self.SYMBOL
@@ -226,5 +235,3 @@ class UnaryNegation(Operator):
 
     def get_symbol(self):
         return self.SYMBOL
-
-

@@ -1,7 +1,6 @@
 from exceptions import IllegalCharsException, MismatchingParenthesesException, \
     ImbalancedParentheses, SyntaxException
 
-
 class IllegalCharsValidator:
     """
     This class checks for illegal characters

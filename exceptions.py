@@ -13,7 +13,7 @@ class MissingOperandException(Exception):
         self._received = received
 
     def __str__(self):
-        return f"Missing operand expected: {self._expected} received {self._received}"
+        return f"Missing operand, expected {self._expected} received {self._received}"
 
 
 class MissingOperatorException(Exception):
