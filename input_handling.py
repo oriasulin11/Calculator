@@ -15,13 +15,14 @@ class InputHandler:
     def get_input(self):
         return self._input
 
+
 class StringProcessor:
     """
     This class converts a string of raw input from user,
     to a list where each element is a character
     """
     @staticmethod
-    def string_process(raw_string : str)-> list:
+    def string_process(raw_string: str) -> list:
         if len(raw_string) == 0:
             raise EmptyExpressionException()
         return [char for char in raw_string if char != ' ']

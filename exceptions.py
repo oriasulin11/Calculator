@@ -61,13 +61,91 @@ class ImbalancedParentheses:
             return f"Missing {self._balance} opening parentheses"
 
 
+class StartOfExpressionException(Exception):
+    """
+    This exception will be raised when an expression
+    starts with invalid character
+    """
+    def __init__(self, char: str):
+        super().__init__()
+        self._invalid_char = char
+
+    def __str__(self):
+        return f"Cant start an expression with {self._invalid_char}"
+
+
+class EndOfExpressionException(Exception):
+    """
+    This exception will be raised when an expression
+    ends with invalid character
+    """
+    def __init__(self, char: str):
+        super().__init__()
+        self._invalid_char = char
+
+    def __str__(self):
+        return f"Cant end an expression with {self._invalid_char}"
+
+
+class InvalidOperandException(Exception):
+    def __init__(self, invalid_operand: str):
+        super().__init__()
+        self._invalid_operand = invalid_operand
+
+    def __str__(self):
+        return f"Found invalid operand: {self._invalid_operand}"
+
+
+class InvalidCharAfterTildaException(Exception):
+    def __init__(self, invalid_char):
+        super().__init__()
+        self._invalid_char = invalid_char
+
+    def __str__(self):
+        return f"The character {self._invalid_char} is not legal after ~"
+
+
+class PostParseException(Exception):
+    def __init__(self, exception):
+        self._exception = exception
+
+    def __str__(self):
+        return str(self._exception)
+
+
+class IllegalUnaryMinusException(Exception):
+    """
+    This exception will be raised when
+    an illegal unary minus occurs
+    """
+    def __init__(self, index):
+        super().__init__()
+        self._index = index
+
+    def __str__(self):
+        return f"The unary '-' in index {self._index} is illegal"
+
+
+class IllegalSignMinusException(Exception):
+    """
+    This exception will be raised when
+    an illegal unary minus occurs
+    """
+    def __init__(self, index):
+        super().__init__()
+        self._index = index
+
+    def __str__(self):
+        return f"The sign '-' in index {self._index} is illegal"
+
+
 class SyntaxException(Exception):
     def __init__(self, exceptions: list):
-        super().__init__(exceptions)
+        super().__init__()
         self._exceptions = exceptions
 
     def __str__(self):
         exception_str = ""
         for exception in self._exceptions:
-            exception_str += str(exception)
+            exception_str += str(exception) + '\n'
         return exception_str

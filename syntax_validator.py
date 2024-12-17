@@ -1,12 +1,16 @@
 from exceptions import IllegalCharsException, MismatchingParenthesesException, \
-    ImbalancedParentheses, SyntaxException
+    ImbalancedParentheses, SyntaxException, EndOfExpressionException, StartOfExpressionException
+from math_functions import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
+
+DIGITS = list("1234567890")
+
 
 class IllegalCharsValidator:
     """
     This class checks for illegal characters
     in the users input
     """
-    LEGAL_CHARS = "1234567890.~!@$%^&*()-+/"
+    LEGAL_CHARS = DIGITS + BINARY_OPERATORS + UNARY_OPERATORS + ['(', ')', '.']
 
     @staticmethod
     def get_illegal_chars(user_input: list) -> list:
@@ -21,6 +25,7 @@ class MatchingParenthesesValidator:
     This class validates that the given user input has
     matching parentheses.
     """
+
     @staticmethod
     def _is_matching_parentheses(user_input: list) -> bool:
         """
@@ -56,11 +61,33 @@ class MatchingParenthesesValidator:
         return parentheses_balance
 
 
+class StartEndExpressionValidator:
+    """
+    This class will check if a non-empty expression
+    starts and ends in valid characters
+    """
+    VALID_START_CHARACTERS = ['(', '-'] + PREFIX_OPERATORS + DIGITS
+    VALID_END_CHARACTERS = [')'] + POSTFIX_OPERATORS + DIGITS
+
+    @staticmethod
+    def check_start(user_input: list):
+        if user_input[0] not in StartEndExpressionValidator.VALID_START_CHARACTERS:
+            return user_input[0]
+        return None
+
+    @staticmethod
+    def check_end(user_input: list):
+        if user_input[-1] not in StartEndExpressionValidator.VALID_END_CHARACTERS:
+            return user_input[-1]
+        return None
+
+
 class SyntaxValidator:
     """
     This class will validate the processed input
     from the user.
     """
+
     def __init__(self, user_input: list):
         self._input = user_input
         # List of Exceptions found
@@ -73,6 +100,8 @@ class SyntaxValidator:
         """
         illegal_chars = IllegalCharsValidator.get_illegal_chars(self._input)
         parentheses_balance = MatchingParenthesesValidator.get_parentheses_balance(self._input)
+        illegal_start = StartEndExpressionValidator.check_start(self._input)
+        illegal_end = StartEndExpressionValidator.check_end(self._input)
 
         if len(illegal_chars) > 0:
             self._exceptions.append(IllegalCharsException(illegal_chars))
@@ -82,6 +111,12 @@ class SyntaxValidator:
 
         elif parentheses_balance != 0:
             self._exceptions.append(ImbalancedParentheses(parentheses_balance))
+
+        if illegal_start is not None:
+            self._exceptions.append(StartOfExpressionException(illegal_start))
+
+        if len(self._input) > 1 and illegal_end is not None:
+            self._exceptions.append(EndOfExpressionException(illegal_end))
 
         self.handle_exceptions()
 
