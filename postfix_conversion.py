@@ -1,13 +1,16 @@
 from math_functions import Number, Plus, Minus, Multiplication, Division, MaxOperator, Modulo, \
-    AverageOperator, UnaryNegation, Factorial, Power, UNARY_OPERATORS, POSTFIX_OPERATORS, PRECEDENCE_DIC
+    AverageOperator, UnaryNegation, Factorial, Power, UNARY_OPERATORS, POSTFIX_OPERATORS, PRECEDENCE_DIC, \
+    PREFIX_OPERATORS
 
-OPERATORS_DIC = {'+':Plus(), '-':Minus(), '-u':Minus(), '*':Multiplication(), '/':Division(),'^':Power(), '$':MaxOperator(), '%':Modulo(), '@':AverageOperator(), '~':UnaryNegation(), '!':Factorial()}
+OPERATORS_DIC = {'+': Plus(), '-': Minus(), '-u': Minus(), '*': Multiplication(), '/': Division(), '^': Power(),
+                 '$': MaxOperator(), '%': Modulo(), '@': AverageOperator(), '~': UnaryNegation(), '!': Factorial(),
+                 '-s': Minus()}
+
 
 class PostFixConvertor:
 
-
     @staticmethod
-    def convert(infix_expression : list) -> list:
+    def convert(infix_expression: list) -> list:
         operator_stack = []
         postfix_expression = []
         for char in infix_expression:
@@ -30,10 +33,14 @@ class PostFixConvertor:
                     if char not in POSTFIX_OPERATORS:
                         operator_stack.append(char)
                     else:
+                        while (operator_stack and operator_stack[-1] in PREFIX_OPERATORS and operator_stack[-1] != '('
+                                and operator_stack[-1] != ')' and
+                               PRECEDENCE_DIC[operator_stack[-1]] >= PRECEDENCE_DIC[char]):
+                            postfix_expression.append(operator_stack.pop())
                         postfix_expression.append(char)
                 else:
                     while (operator_stack and
-                            operator_stack[-1] != '(' and
+                           operator_stack[-1] != '(' and
                            operator_stack != '(' and
                            PRECEDENCE_DIC[operator_stack[-1]] >= PRECEDENCE_DIC[char]):
                         postfix_expression.append(operator_stack.pop())
@@ -42,6 +49,3 @@ class PostFixConvertor:
         while operator_stack:
             postfix_expression.append(operator_stack.pop())
         return postfix_expression
-
-
-

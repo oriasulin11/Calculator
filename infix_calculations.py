@@ -14,24 +14,19 @@ class InfixCalc:
         found_operator = False
 
         prev_char = None
-        minus_count = 0
         processed_input = []
         for index, char in enumerate(user_input):
             if char in ('(', ')'):
                 processed_input.append(char)
             elif isinstance(char, Number):
-                if minus_count % 2 == 0:
-                    processed_input.append(Number(char.get_value()))
-                else:
-                    processed_input.append(Number(-char.get_value()))
-                minus_count = 0
+                processed_input.append(Number(char.get_value()))
                 found_operator = False
             else:
                 if char == '-':
-                    if isinstance(prev_char, Number) or prev_char in POSTFIX_OPERATORS:
+                    if isinstance(prev_char, Number) or prev_char in POSTFIX_OPERATORS or prev_char == ')':
                         processed_input.append(char)
                     elif found_operator:
-                        minus_count += 1
+                        processed_input.append('-s')
                     elif index != len(user_input) - 1:
                         if isinstance(user_input[index + 1], Number) or user_input[index + 1] in ('(', '-u'):
                             processed_input.append('-u')
