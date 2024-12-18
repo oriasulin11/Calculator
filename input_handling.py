@@ -9,7 +9,9 @@ class InputHandler:
         self._input = ""
 
     def take_input(self):
-        raw_input = input("\nEnter Arithmetic Expression To Evaluate\n")
+        raw_input = input("\nEnter Arithmetic Expression To Evaluate, Enter exit to stop\n")
+        if raw_input == "exit":
+            exit()
         self._input = raw_input
 
     def get_input(self):

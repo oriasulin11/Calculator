@@ -16,7 +16,6 @@ class MainThread:
             try:
                 # Taking input from user
                 input_handler = InputHandler()
-
                 input_handler.take_input()
                 # process input to a list of chars
                 initial_input = StringProcessor.string_process(input_handler.get_input())
@@ -37,6 +36,8 @@ class MainThread:
                 # Evaluate the result
                 result = PostfixEvaluation.evaluate_postfix(postfix_expression)
                 print(result.get_value())
+            except KeyboardInterrupt as e:
+                print("Forced Stop")
             except EmptyExpressionException as e:
                 print(e)
             except SyntaxException as e:

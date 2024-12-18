@@ -1,10 +1,10 @@
 from math_functions import Number, Plus, Minus, Multiplication, Division, MaxOperator, Modulo, \
     AverageOperator, UnaryNegation, Factorial, Power, UNARY_OPERATORS, POSTFIX_OPERATORS, PRECEDENCE_DIC, \
-    PREFIX_OPERATORS
+    PREFIX_OPERATORS, DigitSummation
 
 OPERATORS_DIC = {'+': Plus(), '-': Minus(), '-u': Minus(), '*': Multiplication(), '/': Division(), '^': Power(),
                  '$': MaxOperator(), '%': Modulo(), '@': AverageOperator(), '~': UnaryNegation(), '!': Factorial(),
-                 '-s': Minus()}
+                 '-s': Minus(), '#': DigitSummation()}
 
 
 class PostFixConvertor:

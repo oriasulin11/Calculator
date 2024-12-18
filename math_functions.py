@@ -2,12 +2,12 @@ import math
 from abc import ABC, abstractmethod
 
 PRECEDENCE_DIC = {'+': 1, '-': 1, '*': 2, '/': 2, '-u': 2.5, '^': 3, '%': 4, '$': 5, '&': 5, '@': 5, '~': 6, '!': 6,
-                  '-s': 7}
+                  '#': 6, '-s': 7}
 
 BINARY_OPERATORS = ['+', '-', '*', '/', '^', '@', '%', '$', '&']
 PREFIX_OPERATORS = ['-u', '~', '-s']
-POSTFIX_OPERATORS = ['!', '#']
-UNARY_OPERATORS = ['-u', '~', '!', '-s']
+POSTFIX_OPERATORS = ['!', '#', '#']
+UNARY_OPERATORS = ['-u', '~', '!', '-s', '#']
 
 
 class Number:
@@ -233,6 +233,31 @@ class UnaryNegation(Operator):
             raise ValueError("Unary negation is a single-operand operator")
 
         return Number(-first_operand.get_value())
+
+    def get_symbol(self):
+        return self.SYMBOL
+
+
+class DigitSummation(Operator):
+    """
+    unary operator which sums the
+    digits of the operand
+    """
+    SYMBOL = '#'
+
+    def evaluate(self, first_operand: Number, second_operand: Number = None) -> Number:
+        if second_operand is not None:
+            raise ValueError("Digit Summation is a single-operand operator")
+        if first_operand.get_value() <= 0:
+            raise ValueError("Digit summation is only defined for positive numbers")
+        operand_value = str(first_operand.get_value())
+        if 'e' in operand_value:
+            raise ValueError("Digit summation is invalid for floating point representation")
+        result = 0
+        for digit in operand_value:
+            if digit != '.':
+                result += int(digit)
+        return Number(result)
 
     def get_symbol(self):
         return self.SYMBOL
