@@ -14,9 +14,14 @@ class MainThread:
     def start_program():
         while True:
             # Taking input from user
-            input_handler = InputHandler()
-            input_handler.take_input()
-            MainThread.evaluate(input_handler.get_input())
+            try:
+                input_handler = InputHandler()
+                input_handler.take_input()
+                result = MainThread.evaluate(input_handler.get_input())
+                if result is not None:
+                    print(result)
+            except KeyboardInterrupt:
+                print("Forced stop")
 
     @staticmethod
     def evaluate(user_input: str):
@@ -39,9 +44,7 @@ class MainThread:
             postfix_expression = PostFixConvertor.convert(infix_evaluated_expression)
             # Evaluate the result
             result = PostfixEvaluation.evaluate_postfix(postfix_expression)
-            print(result.get_value())
-        except KeyboardInterrupt:
-            print("Forced Stop")
+            return result.get_value()
         except EmptyExpressionException as e:
             print(e)
         except SyntaxException as e:
