@@ -36,7 +36,7 @@ class MainThread:
                 # Evaluate the result
                 result = PostfixEvaluation.evaluate_postfix(postfix_expression)
                 print(result.get_value())
-            except KeyboardInterrupt as e:
+            except KeyboardInterrupt:
                 print("Forced Stop")
             except EmptyExpressionException as e:
                 print(e)
@@ -62,4 +62,5 @@ class MainThread:
                 print(e)
 
 
-MainThread().start_program()
+if __name__ == "__main__":
+    MainThread.start_program()

@@ -1,6 +1,6 @@
+from constants import PRECEDENCE_DIC, UNARY_OPERATORS, POSTFIX_OPERATORS, PREFIX_OPERATORS
 from math_functions import Number, Plus, Minus, Multiplication, Division, MaxOperator, Modulo, \
-    AverageOperator, UnaryNegation, Factorial, Power, UNARY_OPERATORS, POSTFIX_OPERATORS, PRECEDENCE_DIC, \
-    PREFIX_OPERATORS, DigitSummation
+    AverageOperator, UnaryNegation, Factorial, Power, DigitSummation
 
 OPERATORS_DIC = {'+': Plus(), '-': Minus(), '-u': Minus(), '*': Multiplication(), '/': Division(), '^': Power(),
                  '$': MaxOperator(), '%': Modulo(), '@': AverageOperator(), '~': UnaryNegation(), '!': Factorial(),

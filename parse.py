@@ -12,7 +12,7 @@ class NumberParser:
     def parse_number(number, is_decimal):
         try:
             operand = Number(float(number)) if is_decimal else Number(int(number))
-        except ValueError as e:
+        except ValueError:
             raise InvalidOperandException(number)
         return operand
 

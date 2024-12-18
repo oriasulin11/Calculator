@@ -1,5 +1,5 @@
 from exceptions import InvalidCharAfterTildaException, PostParseException
-from math_functions import PREFIX_OPERATORS, Number
+from math_functions import Number
 
 
 class AfterTildaValidation:
@@ -34,4 +34,3 @@ class PostParsingValidator:
             AfterTildaValidation.after_tilda_validation(self._parsed_input)
         except InvalidCharAfterTildaException as e:
             raise PostParseException(e)
-

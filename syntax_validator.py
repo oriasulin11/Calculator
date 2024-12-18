@@ -1,6 +1,7 @@
+from constants import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
 from exceptions import IllegalCharsException, MismatchingParenthesesException, \
     ImbalancedParentheses, SyntaxException, EndOfExpressionException, StartOfExpressionException
-from math_functions import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
+
 
 DIGITS = list("1234567890")
 

@@ -28,17 +28,3 @@ class StringProcessor:
         if len(raw_string) == 0:
             raise EmptyExpressionException()
         return [char for char in raw_string if char != ' ']
-
-
-
-
-
-
-
-
-
-
-
-
-
-

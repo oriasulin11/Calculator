@@ -1,6 +1,6 @@
+from constants import POSTFIX_OPERATORS, BINARY_OPERATORS, PREFIX_OPERATORS
 from exceptions import MissingOperandException, IllegalUnaryMinusException, IllegalSignMinusException
 from math_functions import Number
-from math_functions import BINARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
 
 
 class InfixCalc:
