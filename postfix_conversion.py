@@ -8,6 +8,10 @@ OPERATORS_DIC = {'+': Plus(), '-': Minus(), '-u': Minus(), '*': Multiplication()
 
 
 class PostFixConvertor:
+    """
+    This class Converts Parsed expression
+    to postfix form
+    """
 
     @staticmethod
     def convert(infix_expression: list) -> list:
@@ -29,16 +33,20 @@ class PostFixConvertor:
                     operator_stack.pop()
             # Char is an operator
             else:
+                # Handling Unary operator
                 if char in UNARY_OPERATORS:
                     if char not in POSTFIX_OPERATORS:
                         operator_stack.append(char)
                     else:
+                        # Pop all the higher precedence PreFix operators from the stack
                         while (operator_stack and operator_stack[-1] in PREFIX_OPERATORS and operator_stack[-1] != '('
                                 and operator_stack[-1] != ')' and
                                PRECEDENCE_DIC[operator_stack[-1]] >= PRECEDENCE_DIC[char]):
                             postfix_expression.append(operator_stack.pop())
                         postfix_expression.append(char)
+                # Handling binary operators
                 else:
+                    # Pop all the higher precedence operators from the stack
                     while (operator_stack and
                            operator_stack[-1] != '(' and
                            operator_stack != '(' and

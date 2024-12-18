@@ -18,6 +18,10 @@ class NumberParser:
 
     @staticmethod
     def parse_expression(user_input: list) -> list:
+        """
+        This function iterates over the input
+        and parse numbers from strings to Number objs
+        """
         parsed_expression = []
         number = ""
         is_decimal = False

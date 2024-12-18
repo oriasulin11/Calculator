@@ -12,19 +12,24 @@ class InfixCalc:
     @staticmethod
     def eval_expression(user_input: list) -> list:
         found_operator = False
-
         prev_char = None
         processed_input = []
+        # Iterating over the characters in the input
         for index, char in enumerate(user_input):
+            # No spacial handling for parentheses
             if char in ('(', ')'):
                 processed_input.append(char)
             elif isinstance(char, Number):
-                processed_input.append(Number(char.get_value()))
+                processed_input.append(char)
+                # Reset the flag of found operator
                 found_operator = False
             else:
+                # Handle '-'
                 if char == '-':
+                    # Check for binary minus
                     if isinstance(prev_char, Number) or prev_char in POSTFIX_OPERATORS or prev_char == ')':
                         processed_input.append(char)
+                    # Handel sign minus
                     elif found_operator and processed_input[-1] != '-u':
                         # Check if sign minus is legal
                         check_sign_index = index + 1
@@ -34,7 +39,7 @@ class InfixCalc:
                             processed_input.append('-s')
                         else:
                             raise IllegalSignMinusException(index)
-                    # Minus is not binary and not sign
+                    # Handle unary minus
                     else:
                         check_unary_index = index+1
                         # Check if the unary minus is valid
@@ -49,6 +54,7 @@ class InfixCalc:
                 if char in BINARY_OPERATORS or char in PREFIX_OPERATORS:
                     found_operator = True
             prev_char = char
+
         if len(processed_input) == 0:
             raise MissingOperandException(1, 0)
         return processed_input

@@ -9,6 +9,7 @@ class MissingOperandException(Exception):
         getting how many operands are expected for the
         operation and how many where given
         """
+        super().__init__()
         self._expected = expected
         self._received = received
 
@@ -88,6 +89,10 @@ class EndOfExpressionException(Exception):
 
 
 class InvalidOperandException(Exception):
+    """
+    This exception is raised when an invalid operand is
+    created
+    """
     def __init__(self, invalid_operand: str):
         super().__init__()
         self._invalid_operand = invalid_operand
@@ -97,6 +102,11 @@ class InvalidOperandException(Exception):
 
 
 class InvalidCharAfterTildaException(Exception):
+    """
+    Tilda is a spacial operator which needs spacial
+    care. After tilda there can only be '-','(' and a Number
+    damm I hate tilda
+    """
     def __init__(self, invalid_char):
         super().__init__()
         self._invalid_char = invalid_char
@@ -106,7 +116,13 @@ class InvalidCharAfterTildaException(Exception):
 
 
 class PostParseException(Exception):
+    """
+    This exception is raised when one or more
+    post parse exceptions occur,
+    such as InvalidCharAfterTildaException
+    """
     def __init__(self, exception):
+        super().__init__()
         self._exception = exception
 
     def __str__(self):
@@ -140,11 +156,19 @@ class IllegalSignMinusException(Exception):
 
 
 class SyntaxException(Exception):
+    """
+    This exception will be raised when one or more
+    syntax errors occurs such as, IllegalCharsException
+    MismatchingParenthesesException etc...
+    """
     def __init__(self, exceptions: list):
         super().__init__()
         self._exceptions = exceptions
 
     def __str__(self):
+        """
+        returns a list of exceptions
+        """
         exception_str = ""
         for exception in self._exceptions:
             exception_str += str(exception) + '\n'

@@ -4,6 +4,9 @@ from math_functions import Number
 
 
 class PostfixEvaluation:
+    """
+    This class Evaluate postfix expression
+    """
     @staticmethod
     def evaluate_postfix(postfix_expression):
         number_stack = []

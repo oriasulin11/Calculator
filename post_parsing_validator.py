@@ -10,20 +10,14 @@ class AfterTildaValidation:
 
     @staticmethod
     def after_tilda_validation(parsed_input: list):
+        """
+        This function validates that after every tilda
+        comes either a Number a sign '-' or a '('
+        """
         for index, char in enumerate(parsed_input):
             if char == '~' and not (isinstance(parsed_input[index + 1], Number) or parsed_input[index + 1] == '('
                                     or parsed_input[index + 1] == '-s'):
                 raise InvalidCharAfterTildaException(parsed_input[index + 1])
-
-
-class InvalidCharAdjacentToOperatorValidator:
-    @staticmethod
-    def invalid_char_pre_operator(user_input):
-        prev_char = None
-        for index, char in enumerate(user_input):
-            if char in PREFIX_OPERATORS and prev_char is not None:
-                if not isinstance(prev_char, Number):
-                    pass
 
 
 class PostParsingValidator:
