@@ -4,3 +4,4 @@ BINARY_OPERATORS = ['+', '-', '*', '/', '^', '@', '%', '$', '&']
 PREFIX_OPERATORS = ['-u', '~', '-s']
 POSTFIX_OPERATORS = ['!', '#', '#']
 UNARY_OPERATORS = ['-u', '~', '!', '-s', '#']
+DIGITS = list("1234567890")

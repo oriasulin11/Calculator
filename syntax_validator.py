@@ -1,9 +1,6 @@
-from constants import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS
+from constants import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS, DIGITS
 from exceptions import IllegalCharsException, MismatchingParenthesesException, \
     ImbalancedParentheses, SyntaxException, EndOfExpressionException, StartOfExpressionException
-
-
-DIGITS = list("1234567890")
 
 
 class IllegalCharsValidator:
