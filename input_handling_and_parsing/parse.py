@@ -1,5 +1,5 @@
-from exceptions import InvalidOperandException
-from math_functions import Number
+from validation_unit.exceptions import InvalidOperandException
+from calculation_unit.math_functions import Number
 
 
 class NumberParser:

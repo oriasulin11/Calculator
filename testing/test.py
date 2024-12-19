@@ -1,6 +1,6 @@
 import pytest
 
-from exceptions import IllegalUnaryMinusException, IllegalSignMinusException
+from validation_unit.exceptions import IllegalUnaryMinusException
 from main_thread import MainThread
 
 

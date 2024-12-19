@@ -1,5 +1,5 @@
 from constants import POSTFIX_OPERATORS, BINARY_OPERATORS, PREFIX_OPERATORS
-from exceptions import MissingOperandException, IllegalUnaryMinusException, IllegalSignMinusException
+from validation_unit.exceptions import MissingOperandException, IllegalUnaryMinusException, IllegalSignMinusException
 from math_functions import Number
 
 

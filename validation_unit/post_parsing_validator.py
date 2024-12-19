@@ -1,5 +1,5 @@
-from exceptions import InvalidCharAfterTildaException, PostParseException
-from math_functions import Number
+from validation_unit.exceptions import InvalidCharAfterTildaException, PostParseException
+from calculation_unit.math_functions import Number
 
 
 class AfterTildaValidation:

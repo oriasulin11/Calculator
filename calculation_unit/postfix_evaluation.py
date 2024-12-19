@@ -1,6 +1,6 @@
-from exceptions import MissingOperandException, MissingOperatorException
-from postfix_conversion import UNARY_OPERATORS, OPERATORS_DIC
-from math_functions import Number
+from validation_unit.exceptions import MissingOperandException, MissingOperatorException
+from calculation_unit.postfix_conversion import UNARY_OPERATORS, OPERATORS_DIC
+from calculation_unit.math_functions import Number
 
 
 class PostfixEvaluation:

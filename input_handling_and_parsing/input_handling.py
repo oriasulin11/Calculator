@@ -1,4 +1,4 @@
-from exceptions import EmptyExpressionException
+from validation_unit.exceptions import EmptyExpressionException
 
 
 class InputHandler:

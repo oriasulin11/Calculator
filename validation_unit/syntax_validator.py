@@ -1,5 +1,5 @@
 from constants import BINARY_OPERATORS, UNARY_OPERATORS, PREFIX_OPERATORS, POSTFIX_OPERATORS, DIGITS
-from exceptions import IllegalCharsException, MismatchingParenthesesException, \
+from validation_unit.exceptions import IllegalCharsException, MismatchingParenthesesException, \
     ImbalancedParentheses, SyntaxException, EndOfExpressionException, StartOfExpressionException
 
 
