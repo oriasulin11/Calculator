@@ -22,51 +22,52 @@ class MainThread:
                     print(result)
             except KeyboardInterrupt:
                 print("Forced stop")
+            except EmptyExpressionException as e:
+                print(e)
+            except SyntaxException as e:
+                print(e)
+            except MissingOperandException as e:
+                print(e)
+            except MissingOperatorException as e:
+                print(e)
+            except InvalidOperandException as e:
+                print(e)
+            except ValueError as e:
+                print(e)
+            except ZeroDivisionError as e:
+                print(e)
+            except OverflowError as e:
+                print(e)
+            except PostParseException as e:
+                print(e)
+            except IllegalUnaryMinusException as e:
+                print(e)
+            except IllegalSignMinusException as e:
+                print(e)
+            except UnicodeDecodeError as e:
+                print(e)
 
     @staticmethod
     def evaluate(user_input: str):
-        try:
-            # process input to a list of chars
-            initial_input = StringProcessor.string_process(user_input)
+        # process input to a list of chars
+        initial_input = StringProcessor.string_process(user_input)
 
-            validator = SyntaxValidator(initial_input)
-            # validate user input
-            validator.validate()
-            # Parse Numbers to objects
-            parsed_input = NumberParser.parse_expression(initial_input)
+        validator = SyntaxValidator(initial_input)
+        # validate user input
+        validator.validate()
+        # Parse Numbers to objects
+        parsed_input = NumberParser.parse_expression(initial_input)
 
-            # Evaluate unary and sign minuses in infix form
-            infix_evaluated_expression = InfixCalc.eval_expression(parsed_input)
-            # post parse validation
-            post_parse_validator = PostParsingValidator(infix_evaluated_expression)
-            post_parse_validator.validate()
-            # Convert infix to postfix expression
-            postfix_expression = PostFixConvertor.convert(infix_evaluated_expression)
-            # Evaluate the result
-            result = PostfixEvaluation.evaluate_postfix(postfix_expression)
-            return result.get_value()
-        except EmptyExpressionException as e:
-            print(e)
-        except SyntaxException as e:
-            print(e)
-        except MissingOperandException as e:
-            print(e)
-        except MissingOperatorException as e:
-            print(e)
-        except InvalidOperandException as e:
-            print(e)
-        except ValueError as e:
-            print(e)
-        except ZeroDivisionError as e:
-            print(e)
-        except OverflowError as e:
-            print(e)
-        except PostParseException as e:
-            print(e)
-        except IllegalUnaryMinusException as e:
-            print(e)
-        except IllegalSignMinusException as e:
-            print(e)
+        # Evaluate unary and sign minuses in infix form
+        infix_evaluated_expression = InfixCalc.eval_expression(parsed_input)
+        # post parse validation
+        post_parse_validator = PostParsingValidator(infix_evaluated_expression)
+        post_parse_validator.validate()
+        # Convert infix to postfix expression
+        postfix_expression = PostFixConvertor.convert(infix_evaluated_expression)
+        # Evaluate the result
+        result = PostfixEvaluation.evaluate_postfix(postfix_expression)
+        return result.get_value()
 
 
 if __name__ == "__main__":
