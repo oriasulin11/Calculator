@@ -157,6 +157,22 @@ class MaxOperator(Operator):
         return self.SYMBOL
 
 
+class MinimumOperator(Operator):
+    """
+    Binary min operator
+    returns the minimum of two operands
+    """
+    SYMBOL = '&'
+
+    def evaluate(self, first_operand: Number, second_operand: Number = None) -> Number:
+        if second_operand is None:
+            raise ValueError("Min operator requires two operands")
+        return Number(min(first_operand.get_value(), second_operand.get_value()))
+
+    def get_symbol(self):
+        return self.SYMBOL
+
+
 class Modulo(Operator):
     """
     Binary modulo operator.

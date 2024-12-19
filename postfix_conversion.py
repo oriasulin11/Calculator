@@ -1,9 +1,9 @@
 from constants import PRECEDENCE_DIC, UNARY_OPERATORS, POSTFIX_OPERATORS, PREFIX_OPERATORS
 from math_functions import Number, Plus, Minus, Multiplication, Division, MaxOperator, Modulo, \
-    AverageOperator, UnaryNegation, Factorial, Power, DigitSummation
+    AverageOperator, UnaryNegation, Factorial, Power, DigitSummation, MinimumOperator
 
 OPERATORS_DIC = {'+': Plus(), '-': Minus(), '-u': Minus(), '*': Multiplication(), '/': Division(), '^': Power(),
-                 '$': MaxOperator(), '%': Modulo(), '@': AverageOperator(), '~': UnaryNegation(), '!': Factorial(),
+                 '$': MaxOperator(), '&': MinimumOperator(), '%': Modulo(), '@': AverageOperator(), '~': UnaryNegation(), '!': Factorial(),
                  '-s': Minus(), '#': DigitSummation()}
 
 
