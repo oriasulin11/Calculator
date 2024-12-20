@@ -44,8 +44,6 @@ class MainThread:
                 print(e)
             except IllegalSignMinusException as e:
                 print(e)
-            except UnicodeDecodeError as e:
-                print(e)
 
     @staticmethod
     def evaluate(user_input: str):
