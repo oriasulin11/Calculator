@@ -1,12 +1,12 @@
-from validation_unit.exceptions import MissingOperandException, MissingOperatorException, SyntaxException, EmptyExpressionException, \
+from exceptions import MissingOperandException, MissingOperatorException, SyntaxException, EmptyExpressionException, \
     InvalidOperandException, PostParseException, IllegalUnaryMinusException, IllegalSignMinusException
-from calculation_unit.infix_calculations import InfixCalc
-from input_handling_and_parsing.input_handling import InputHandler, StringProcessor
-from validation_unit.post_parsing_validator import PostParsingValidator
-from calculation_unit.postfix_conversion import PostFixConvertor
-from input_handling_and_parsing.parse import NumberParser
-from calculation_unit.postfix_evaluation import PostfixEvaluation
-from validation_unit.syntax_validator import SyntaxValidator
+from infix_calculations import InfixCalc
+from input_handling import InputHandler, StringProcessor
+from post_parsing_validator import PostParsingValidator
+from postfix_conversion import PostFixConvertor
+from parse import NumberParser
+from postfix_evaluation import PostfixEvaluation
+from syntax_validator import SyntaxValidator
 
 
 class MainThread:

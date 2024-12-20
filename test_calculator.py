@@ -1,6 +1,6 @@
 import pytest
 
-from validation_unit.exceptions import IllegalUnaryMinusException
+from exceptions import IllegalUnaryMinusException, IllegalSignMinusException, SyntaxException
 from main_thread import MainThread
 
 
@@ -34,12 +34,17 @@ def test_for_precedence_functionality():
 
 
 def test_for_valid_binary_unary_and_sign_minus():
+    """
+    Test functionality and behavior of unary
+    binary and sign minuses combinations
+    """
     assert MainThread.evaluate("3+~-3") == 6
     assert MainThread.evaluate("~-3!") == 6
     assert MainThread.evaluate("-3!") == -6
     assert MainThread.evaluate("--3!") == 6
     assert MainThread.evaluate("2---3!") == -4
     assert MainThread.evaluate("2+--3!") == 8
+    assert MainThread.evaluate("3+~-3") == 6
 
 
 def test_for_invalid_unary_minus():
@@ -47,3 +52,26 @@ def test_for_invalid_unary_minus():
         MainThread.evaluate("--~--3")
         MainThread.evaluate("~--~-3")
         MainThread.evaluate("-(--~3!+1)")
+
+
+def test_for_invalid_sign_minus():
+    with pytest.raises(IllegalSignMinusException):
+        MainThread.evaluate("2---~3")
+        MainThread.evaluate("2--~2")
+        MainThread.evaluate("(2--(3--~2))")
+
+
+def test_invalid_parentheses_errors():
+    """
+    Test for invalid syntax regarding parentheses
+    """
+    with pytest.raises(SyntaxException):
+        MainThread.evaluate(")3+1")
+        MainThread.evaluate("3+1(")
+        MainThread.evaluate("3+1~")
+        MainThread.evaluate(")3+1(")
+        MainThread.evaluate("(3+1))")
+        MainThread.evaluate("((3+1)")
+        MainThread.evaluate("a+b")
+        MainThread.evaluate("4+b)")
+        MainThread.evaluate("4+b)")
