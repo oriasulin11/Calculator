@@ -17,7 +17,10 @@ class InfixCalc:
         # Iterating over the characters in the input
         for index, char in enumerate(user_input):
             # No spacial handling for parentheses
-            if char in ('(', ')'):
+            if char == '(':
+                found_operator = False
+                processed_input.append(char)
+            elif char == ')':
                 processed_input.append(char)
             elif isinstance(char, Number):
                 processed_input.append(char)

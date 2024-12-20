@@ -1,7 +1,8 @@
 import pytest
 
 from exceptions import IllegalUnaryMinusException, IllegalSignMinusException, SyntaxException, \
-    EmptyExpressionException,  PostParseException
+    EmptyExpressionException, PostParseException, MissingOperandException, MissingOperatorException, \
+    InvalidOperandException
 
 from main_thread import MainThread
 
@@ -48,6 +49,10 @@ def test_for_valid_binary_unary_and_sign_minus():
     assert MainThread.evaluate("2+--3!") == 8
     assert MainThread.evaluate("3+~-3") == 6
     assert MainThread.evaluate("3--(3-5)!") == 1
+    assert MainThread.evaluate("3!--(2!--1)") == 9
+    assert MainThread.evaluate("(1+1)-7!-~-3") == -5041
+    assert MainThread.evaluate("2!---2!--1") == 1
+    assert MainThread.evaluate("2!---2!-1") == -1
 
 
 def test_for_invalid_unary_minus():
@@ -161,5 +166,55 @@ def test_for_division_by_zero():
         MainThread.evaluate("2/1000000000000000000*100000000000000")
         MainThread.evaluate("2%1000000000000000000*100000000000000")
 
+
+def test_for_factorial_value_errors():
+    with pytest.raises(ValueError):
+        MainThread.evaluate("(-3)!")
+        MainThread.evaluate("101!")
+        MainThread.evaluate("3.3!")
+
+
+def test_for_pow_value_errors():
+    with pytest.raises(ValueError):
+        # Math domain error
+        MainThread.evaluate("(-4)^0.5")
+        MainThread.evaluate("(-2)^(1/3)")
+        # This is a complex number, my calculator isn`t that good
+        MainThread.evaluate("(-1)^0.5")
+
+
+def test_for_pow_overflow_errors():
+    with pytest.raises(OverflowError):
+        MainThread.evaluate("10^1000")
+        MainThread.evaluate("2^1024")
+
+
+def test_for_digit_summation_value_errors():
+    with pytest.raises(ValueError):
+        MainThread.evaluate("(-123)#")
+        MainThread.evaluate("(10^100)#")
+        MainThread.evaluate("(10^-100)#")
+
+
+def test_for_missing_operand():
+    with pytest.raises(MissingOperandException):
+        MainThread.evaluate("(1+)")
+        MainThread.evaluate("(~())")
+        MainThread.evaluate("(!)")
+        MainThread.evaluate("3$(2&)")
+
+
+def test_for_missing_operator():
+    with pytest.raises(MissingOperatorException):
+        MainThread.evaluate("99!~2")
+        MainThread.evaluate("3~2")
+        MainThread.evaluate("(1)(3)")
+        MainThread.evaluate("(1+23)~(3+6!)")
+
+
+def test_for_invalid_operand():
+    with pytest.raises(InvalidOperandException):
+        MainThread.evaluate("3.3.3 + 2")
+        MainThread.evaluate("(3.3)+.3.1")
 
 

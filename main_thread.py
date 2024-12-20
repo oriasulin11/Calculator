@@ -20,6 +20,7 @@ class MainThread:
                 result = MainThread.evaluate(input_handler.get_input())
                 if result is not None:
                     print(result)
+
             except KeyboardInterrupt:
                 print("Forced stop")
             except EmptyExpressionException as e:
@@ -44,6 +45,8 @@ class MainThread:
                 print(e)
             except IllegalSignMinusException as e:
                 print(e)
+            except EOFError:
+                print("Nice try, almost got me")
 
     @staticmethod
     def evaluate(user_input: str):
